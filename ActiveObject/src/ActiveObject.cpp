@@ -7,20 +7,25 @@
 class ActiveObject::Impl : private EventQueue
 {
 public:
-
     Impl();
 	~Impl();
     void addEvent(std::function<void()> eventHandler);
+    ID getID() const;
 
 private:
     void run();
     std::thread _thread;
 	std::atomic<bool> _stop;
+    static ID _globalId;
+	ID _id;
 };
+
+unsigned int ActiveObject::Impl::_globalId{};
 
 ActiveObject::Impl::Impl() :
     _thread(&Impl::run, this),
-    _stop(false) {}
+    _stop(false),
+    _id(_globalId++) {}
 
 ActiveObject::Impl::~Impl()
 {
@@ -43,16 +48,23 @@ void ActiveObject::Impl::addEvent(std::function<void()> eventHandler)
     EventQueue::pushEvent(eventHandler);
 }
 
-// ActiveObject
-unsigned int ActiveObject::_globalId{};
+ActiveObject::ID ActiveObject::Impl::getID() const
+{
+    return _id;
+}
 
+// ActiveObject
 ActiveObject::ActiveObject() :
-    _impl(std::make_unique<ActiveObject::Impl>()),
-    _id(_globalId++) {}
+    _impl(std::make_unique<ActiveObject::Impl>()) {}
 
 ActiveObject::~ActiveObject() = default;
 
 void ActiveObject::addEvent(std::function<void()> eventHandler)
 {
     _impl->addEvent(std::move(eventHandler)); // Use std::move for efficiency
+}
+
+ActiveObject::ID ActiveObject::getID() const
+{
+    return _impl->getID();
 }

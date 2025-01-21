@@ -7,6 +7,7 @@
 class ActiveObject
 {
 public:
+
 	using ID = unsigned int;
 
     ActiveObject();
@@ -20,13 +21,12 @@ public:
 
 protected:
 	void addEvent(std::function<void()> eventHandler);
-	ID _id;
+	ID getID() const;
 
 private:
 	void run();
 	class Impl;
 	std::unique_ptr<Impl> _impl;
-	static ID _globalId;
 };
 
 #endif
