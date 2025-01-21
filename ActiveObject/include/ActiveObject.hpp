@@ -20,13 +20,13 @@ public:
 
 protected:
 	void addEvent(std::function<void()> eventHandler);
+	ID _id;
 
 private:
 	void run();
 	class Impl;
 	std::unique_ptr<Impl> _impl;
 	static ID _globalId;
-	ID _id;
 };
 
 #endif
