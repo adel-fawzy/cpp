@@ -7,6 +7,8 @@
 class ActiveObject
 {
 public:
+	using ID = unsigned int;
+
     ActiveObject();
 	virtual ~ActiveObject();
 
@@ -23,8 +25,8 @@ private:
 	void run();
 	class Impl;
 	std::unique_ptr<Impl> _impl;
-	static unsigned int _globalId;
-	unsigned int _id;
+	static ID _globalId;
+	ID _id;
 };
 
 #endif
