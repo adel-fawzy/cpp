@@ -44,8 +44,11 @@ void ActiveObject::Impl::addEvent(std::function<void()> eventHandler)
 }
 
 // ActiveObject
+unsigned int ActiveObject::_globalId{};
+
 ActiveObject::ActiveObject() :
-    _impl(std::make_unique<ActiveObject::Impl>()) {}
+    _impl(std::make_unique<ActiveObject::Impl>()),
+    _id(_globalId++) {}
 
 ActiveObject::~ActiveObject() = default;
 

@@ -23,6 +23,8 @@ private:
 	void run();
 	class Impl;
 	std::unique_ptr<Impl> _impl;
+	static unsigned int _globalId;
+	unsigned int _id;
 };
 
 #endif
