@@ -1,6 +1,7 @@
 #include "core/App.hpp"
 #include <iostream>
 #include <thread>
+
 int main()
 {
     App app;
