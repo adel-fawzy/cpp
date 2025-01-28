@@ -4,7 +4,7 @@ project(observer-mediator LANGUAGES CXX)
 
 set(SRC_FILES
     src/main.cpp
-    src/core/App.cpp
+    src/app/App.cpp
     src/core/Display.cpp
     src/core/Mobile.cpp
     src/core/WeatherStation.cpp

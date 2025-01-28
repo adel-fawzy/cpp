@@ -5,11 +5,11 @@ project(adel LANGUAGES CXX)
 # Create lib
 add_library(${PROJECT_NAME} SHARED
     src/core/ActiveObject.cpp
-    src/core/EventQueue.cpp
 )
 
 set(CMAKE_INSTALL_PREFIX /usr)
 
+# Public headers
 target_include_directories(${PROJECT_NAME} PUBLIC
     include/
 )

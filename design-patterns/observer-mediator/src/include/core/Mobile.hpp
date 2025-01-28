@@ -1,17 +1,42 @@
-#ifndef MOBILE_HPP
-#define MOBILE_HPP
+#ifndef OBSERVER_MEDIATOR_MOBILE_HPP
+#define OBSERVER_MEDIATOR_MOBILE_HPP
 
 #include <adel/ActiveObject.hpp>
-#include <utils/Logger.hpp>
+#include "utils/Logger.hpp"
 
-class Mobile : public adel::ActiveObject
+namespace observer_mediator::core
 {
-public:
-    Mobile(Logger& logger);
-    ~Mobile() = default;
-    void setTemperature(int temperature);
-private:
-    Logger& _logger;
-};
+    /**
+     * @class Mobile
+     * 
+     * @brief Logs temperature data on the mobie.
+     */
+    class Mobile : public adel::ActiveObject
+    {
+    public:
 
-#endif // MOBILE_HPP
+        /**
+         * @brief Constructs a Mobile.
+         */
+        Mobile(utils::Logger& logger);
+
+        /**
+         * @brief Destroys a Mobile.
+         */
+        ~Mobile() = default;
+
+        /**
+         * @brief Sets the temperature.
+         */
+        void setTemperature(int temperature);
+
+    private:
+
+        /**
+         * @brief Logger object.
+         */
+        utils::Logger& _logger;
+    }; // class Mobile
+} // namespace observer_mediator::core
+
+#endif // OBSERVER_MEDIATOR_MOBILE_HPP

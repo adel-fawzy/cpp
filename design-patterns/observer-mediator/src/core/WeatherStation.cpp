@@ -9,39 +9,42 @@ namespace
     const std::list<int> kTemperatureSensorReadings{32, 30, 33};
 }
 
-void WeatherStation::run()
+namespace observer_mediator::core
 {
-    auto e = [this]
+    void WeatherStation::run()
     {
-        unsigned int counter{3};
-        for(auto temperatureReading : kTemperatureSensorReadings)
+        auto e = [this]
         {
-            for(auto callback : _temperatureCallbacks)
+            unsigned int counter{3};
+            for(auto temperatureReading : kTemperatureSensorReadings)
             {
-                callback.second(temperatureReading);
+                for(auto callback : _temperatureCallbacks)
+                {
+                    callback.second(temperatureReading);
+                }
+                std::this_thread::sleep_for(std::chrono::seconds(1));
             }
-            std::this_thread::sleep_for(std::chrono::seconds(1));
-        }
-    };
-    addEvent(e);
-}
+        };
+        addEvent(e);
+    }
 
-void WeatherStation::subscribeToTemperature(ActiveObject::ID id, TemperatureCallback callback)
-{
-    auto e = [this, id, callback]{
-        _temperatureCallbacks[id] = callback;
-    };
-    addEvent(e);
-}
+    void WeatherStation::subscribeToTemperature(ID id, TemperatureCallback callback)
+    {
+        auto e = [this, id, callback]{
+            _temperatureCallbacks[id] = callback;
+        };
+        addEvent(e);
+    }
 
-void WeatherStation::unsubscribeFromTemperature(ActiveObject::ID id)
-{
-    auto e = [this, id]{
-        auto it = _temperatureCallbacks.find(id);
-        if(it != _temperatureCallbacks.end())
-        {
-            _temperatureCallbacks.erase(it);
-        }
-    };
-    addEvent(e);
-}
+    void WeatherStation::unsubscribeFromTemperature(ID id)
+    {
+        auto e = [this, id]{
+            auto it = _temperatureCallbacks.find(id);
+            if(it != _temperatureCallbacks.end())
+            {
+                _temperatureCallbacks.erase(it);
+            }
+        };
+        addEvent(e);
+    }
+} // namespace observer_mediator::core
