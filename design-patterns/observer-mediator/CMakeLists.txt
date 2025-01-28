@@ -1,3 +1,7 @@
+cmake_minimum_required(VERSION 3.16)
+
+project(observer-mediator LANGUAGES CXX)
+
 set(SRC_FILES
     src/main.cpp
     src/core/App.cpp
@@ -7,16 +11,12 @@ set(SRC_FILES
     src/utils/Logger.cpp
 )
 
-find_package(Threads REQUIRED)
+add_executable(${PROJECT_NAME} ${SRC_FILES})
 
-add_executable(observer-mediator ${SRC_FILES})
-
-target_link_libraries(observer-mediator PRIVATE Threads::Threads)
-
-target_include_directories(observer-mediator PRIVATE
+target_include_directories(${PROJECT_NAME} PRIVATE
     src/include
 )
 
-target_link_libraries(observer-mediator PRIVATE
-    ActiveObject
+target_link_libraries(${PROJECT_NAME} PRIVATE
+    adel
 )

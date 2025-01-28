@@ -1,2 +1,0 @@
-add_subdirectory(pimpl)
-add_subdirectory(observer-mediator)

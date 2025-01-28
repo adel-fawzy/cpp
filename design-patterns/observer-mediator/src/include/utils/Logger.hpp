@@ -9,14 +9,14 @@
 #define LOGGER_HPP
 
 #include <string>
-#include <ActiveObject.hpp>
+#include <adel/ActiveObject.hpp>
 #include <mutex>
 
 /**
  * @brief The Logger class provides a thread-safe singleton for logging messages
  * from different modules within the application.
  */
-class Logger : public ActiveObject
+class Logger : public adel::ActiveObject
 {
 public:
 

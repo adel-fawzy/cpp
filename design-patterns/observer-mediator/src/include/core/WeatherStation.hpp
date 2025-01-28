@@ -1,20 +1,20 @@
 #ifndef WEATHERSTATION_HPP
 #define WEATHERSTATION_HPP
 
-#include <ActiveObject.hpp>
+#include <adel/ActiveObject.hpp>
 #include <functional>
 #include <unordered_map>
 
-class WeatherStation : public ActiveObject
+class WeatherStation : public adel::ActiveObject
 {
 public:
     using TemperatureCallback = std::function<void(int)>;
-    using TemperatureCallbacks = std::unordered_map<ActiveObject::ID, TemperatureCallback>;
+    using TemperatureCallbacks = std::unordered_map<ID, TemperatureCallback>;
     WeatherStation() = default;
     ~WeatherStation() = default;
     void run();
-    void subscribeToTemperature(ActiveObject::ID id, TemperatureCallback callback);
-    void unsubscribeFromTemperature(ActiveObject::ID id);
+    void subscribeToTemperature(ID id, TemperatureCallback callback);
+    void unsubscribeFromTemperature(ID id);
 private:
     TemperatureCallbacks _temperatureCallbacks;
 };

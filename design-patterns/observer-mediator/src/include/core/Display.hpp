@@ -1,10 +1,10 @@
 #ifndef DISPLAY_HPP
 #define DISPLAY_HPP
 
-#include <ActiveObject.hpp>
+#include <adel/ActiveObject.hpp>
 #include <utils/Logger.hpp>
 
-class Display : public ActiveObject
+class Display : public adel::ActiveObject
 {
 public:
     Display(Logger& logger);

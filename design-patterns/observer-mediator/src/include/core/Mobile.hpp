@@ -1,10 +1,10 @@
 #ifndef MOBILE_HPP
 #define MOBILE_HPP
 
-#include <ActiveObject.hpp>
+#include <adel/ActiveObject.hpp>
 #include <utils/Logger.hpp>
 
-class Mobile : public ActiveObject
+class Mobile : public adel::ActiveObject
 {
 public:
     Mobile(Logger& logger);
